@@ -1,0 +1,1266 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Kaggle\_competition\_insurance-claims}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{KAGGLE COMPETITION: Porto Seguro's Safe Driver
+Prediction}\label{kaggle-competition-porto-seguros-safe-driver-prediction}
+
+    \subsection{Predict if a driver will file an insurance claim next
+year.}\label{predict-if-a-driver-will-file-an-insurance-claim-next-year.}
+
+    Nothing ruins the thrill of buying a brand new car more quickly than
+seeing your new insurance bill. The sting's even more painful when you
+know you're a good driver. It doesn't seem fair that you have to pay so
+much if you've been cautious on the road for years.
+
+Porto Seguro, one of Brazil's largest auto and homeowner insurance
+companies, completely agrees. Inaccuracies in car insurance company's
+claim predictions raise the cost of insurance for good drivers and
+reduce the price for bad ones.
+
+In this competition, you're challenged to build a model that predicts
+the probability that a driver will initiate an auto insurance claim in
+the next year. While Porto Seguro has used machine learning for the past
+20 years, they're looking to Kaggle's machine learning community to
+explore new, more powerful methods. A more accurate prediction will
+allow them to further tailor their prices, and hopefully make auto
+insurance coverage more accessible to more drivers.
+
+    \subsubsection{Imports}\label{imports}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{externals} \PY{k}{import} \PY{n}{joblib}
+        
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{offline} \PY{k}{as} \PY{n+nn}{py}
+        \PY{n}{py}\PY{o}{.}\PY{n}{init\PYZus{}notebook\PYZus{}mode}\PY{p}{(}\PY{n}{connected}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{graph\PYZus{}objs} \PY{k}{as} \PY{n+nn}{go}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{tools} \PY{k}{as} \PY{n+nn}{tls}
+        
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{pointbiserialr}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{chi2\PYZus{}contingency}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{MinMaxScaler}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split} 
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{KFold}\PY{p}{,} \PY{n}{GridSearchCV}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression} 
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{xgboost} \PY{k}{import} \PY{n}{XGBClassifier}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{classification\PYZus{}report}
+        
+        \PY{k+kn}{import} \PY{n+nn}{scikitplot} \PY{k}{as} \PY{n+nn}{skplt}
+\end{Verbatim}
+
+
+    
+    
+    Displaying a maximum of five decimal places for better clarity.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{float\PYZus{}format} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.5f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}
+\end{Verbatim}
+
+
+    \subsubsection{Load in data}\label{load-in-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}    id  target  ps\_ind\_01  ps\_ind\_02\_cat  ps\_ind\_03  ps\_ind\_04\_cat  \textbackslash{}
+        0   7       0          2              2          5              1   
+        1   9       0          1              1          7              0   
+        2  13       0          5              4          9              1   
+        3  16       0          0              1          2              0   
+        4  17       0          0              2          0              1   
+        
+           ps\_ind\_05\_cat  ps\_ind\_06\_bin  ps\_ind\_07\_bin  ps\_ind\_08\_bin       {\ldots}        \textbackslash{}
+        0              0              0              1              0       {\ldots}         
+        1              0              0              0              1       {\ldots}         
+        2              0              0              0              1       {\ldots}         
+        3              0              1              0              0       {\ldots}         
+        4              0              1              0              0       {\ldots}         
+        
+           ps\_calc\_11  ps\_calc\_12  ps\_calc\_13  ps\_calc\_14  ps\_calc\_15\_bin  \textbackslash{}
+        0           9           1           5           8               0   
+        1           3           1           1           9               0   
+        2           4           2           7           7               0   
+        3           2           2           4           9               0   
+        4           3           1           1           3               0   
+        
+           ps\_calc\_16\_bin  ps\_calc\_17\_bin  ps\_calc\_18\_bin  ps\_calc\_19\_bin  \textbackslash{}
+        0               1               1               0               0   
+        1               1               1               0               1   
+        2               1               1               0               1   
+        3               0               0               0               0   
+        4               0               0               1               1   
+        
+           ps\_calc\_20\_bin  
+        0               1  
+        1               0  
+        2               0  
+        3               0  
+        4               0  
+        
+        [5 rows x 59 columns]
+\end{Verbatim}
+            
+    Number of examples:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{rows} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+         \PY{n}{rows}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:} 595212
+\end{Verbatim}
+            
+    \subsubsection{Seperating features}\label{seperating-features}
+
+The dataset includes numerical, categorical and binary features. The
+numerical features consist of ordinal and float values. Each feature
+type needs to be treated separately, so first of all we can create three
+lists of columns for the three feature types.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} separate col names into categories}
+        \PY{n}{cols} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{columns}
+        \PY{n}{num\PYZus{}feats}\PY{p}{,} \PY{n}{cat\PYZus{}feats}\PY{p}{,} \PY{n}{bin\PYZus{}feats} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{cols}\PY{p}{:}
+            \PY{k}{if} \PY{n}{col} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{col} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{k}{pass}
+            \PY{k}{elif} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}cat}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{col}\PY{p}{:}
+                \PY{n}{cat\PYZus{}feats}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+            \PY{k}{elif} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{col}\PY{p}{:}
+                \PY{n}{bin\PYZus{}feats}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{num\PYZus{}feats}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+                
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{} Numerical features \PYZhy{}\PYZhy{}\PYZhy{} : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{num\PYZus{}feats}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{} Categorical features \PYZhy{}\PYZhy{}\PYZhy{} : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cat\PYZus{}feats}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{} Binary features \PYZhy{}\PYZhy{}\PYZhy{} : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bin\PYZus{}feats}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+--- Numerical features --- :  
+ ['ps\_ind\_01', 'ps\_ind\_03', 'ps\_ind\_14', 'ps\_ind\_15', 'ps\_reg\_01', 'ps\_reg\_02', 'ps\_reg\_03', 'ps\_car\_11', 'ps\_car\_12', 'ps\_car\_13', 'ps\_car\_14', 'ps\_car\_15', 'ps\_calc\_01', 'ps\_calc\_02', 'ps\_calc\_03', 'ps\_calc\_04', 'ps\_calc\_05', 'ps\_calc\_06', 'ps\_calc\_07', 'ps\_calc\_08', 'ps\_calc\_09', 'ps\_calc\_10', 'ps\_calc\_11', 'ps\_calc\_12', 'ps\_calc\_13', 'ps\_calc\_14'] 
+
+--- Categorical features --- :  
+ ['ps\_ind\_02\_cat', 'ps\_ind\_04\_cat', 'ps\_ind\_05\_cat', 'ps\_car\_01\_cat', 'ps\_car\_02\_cat', 'ps\_car\_03\_cat', 'ps\_car\_04\_cat', 'ps\_car\_05\_cat', 'ps\_car\_06\_cat', 'ps\_car\_07\_cat', 'ps\_car\_08\_cat', 'ps\_car\_09\_cat', 'ps\_car\_10\_cat', 'ps\_car\_11\_cat'] 
+
+--- Binary features --- :  
+ ['ps\_ind\_06\_bin', 'ps\_ind\_07\_bin', 'ps\_ind\_08\_bin', 'ps\_ind\_09\_bin', 'ps\_ind\_10\_bin', 'ps\_ind\_11\_bin', 'ps\_ind\_12\_bin', 'ps\_ind\_13\_bin', 'ps\_ind\_16\_bin', 'ps\_ind\_17\_bin', 'ps\_ind\_18\_bin', 'ps\_calc\_15\_bin', 'ps\_calc\_16\_bin', 'ps\_calc\_17\_bin', 'ps\_calc\_18\_bin', 'ps\_calc\_19\_bin', 'ps\_calc\_20\_bin'] 
+
+
+    \end{Verbatim}
+
+    \subsubsection{Data cleansing}\label{data-cleansing}
+
+The next step is to check how many missing values there are for each
+feature type. As a general rule, I like to eliminate features where more
+than one half of the values are missing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Although it uses more memory, I prefer to create a new copy of the dataframe for each section}
+        \PY{n}{df\PYZus{}cleaned} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} I will also create copies for the feature lists}
+        \PY{n}{num\PYZus{}feats\PYZus{}cleaned} \PY{o}{=} \PY{n}{num\PYZus{}feats}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        \PY{n}{cat\PYZus{}feats\PYZus{}cleaned} \PY{o}{=} \PY{n}{cat\PYZus{}feats}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        \PY{n}{bin\PYZus{}feats\PYZus{}cleaned} \PY{o}{=} \PY{n}{bin\PYZus{}feats}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{Numerical features}\label{numerical-features}
+
+Let's check for missing values (-1) in the numerical feature columns.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} I would like to eliminate any columns that consist of more than one half missing values (\PYZhy{}1)}
+        \PY{n}{num\PYZus{}many\PYZus{}missing} \PY{o}{=} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{num\PYZus{}feats\PYZus{}cleaned}\PY{p}{]}\PY{p}{[}\PY{n}{df} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.50} \PY{c+c1}{\PYZsh{} more than 50\PYZpc{} missing values}
+        \PY{n}{num\PYZus{}many\PYZus{}missing} \PY{o}{=} \PY{n}{num\PYZus{}many\PYZus{}missing}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{num\PYZus{}many\PYZus{}missing} \PY{o}{==} \PY{k+kc}{True}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{num\PYZus{}many\PYZus{}missing}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[]
+
+    \end{Verbatim}
+
+    No columns were returned. We can also have a look at exactly how many
+are missing in the applicable columns.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{counts} \PY{o}{=} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{num\PYZus{}feats\PYZus{}cleaned}\PY{p}{]}\PY{p}{[}\PY{n}{df} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        \PY{n}{cols\PYZus{}with\PYZus{}missing} \PY{o}{=} \PY{n}{counts}\PY{p}{[}\PY{n}{counts}\PY{o}{.}\PY{n}{values} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Column  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Missing count  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Missing ratio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{for} \PY{n}{col}\PY{p}{,} \PY{n}{count} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{cols\PYZus{}with\PYZus{}missing}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{cols\PYZus{}with\PYZus{}missing}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{col}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{count}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{count} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Column   Missing count   Missing ratio
+ps\_reg\_03    107772    0.181
+ps\_car\_11    5    0.000
+ps\_car\_12    1    0.000
+ps\_car\_14    42620    0.072
+
+    \end{Verbatim}
+
+    We can substitute the missing values with the applicable column mean.
+This will limit their impact on the results.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} The few missing values that remain will be substituted with the column mean}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{num\PYZus{}feats\PYZus{}cleaned}\PY{p}{:}
+             \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{[}\PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Check that no missing values remain}
+         \PY{p}{(}\PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{num\PYZus{}feats\PYZus{}cleaned}\PY{p}{]} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}   \PY{c+c1}{\PYZsh{} sums instances of true for each column and then sums across columns}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/george/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:3: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+
+/Users/george/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:3: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 0
+\end{Verbatim}
+            
+    We can be satisfied that no missing values remain.
+
+    \paragraph{Categorical features}\label{categorical-features}
+
+I would like to eliminate any columns that consist of more than one-half
+missing values (-1). If features contain a relatively small proportion
+of missing values, these values can be converted to dummy variables and
+may be a useful part of the analysis.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{cat\PYZus{}many\PYZus{}missing} \PY{o}{=} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{cat\PYZus{}feats\PYZus{}cleaned}\PY{p}{]}\PY{p}{[}\PY{n}{df} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.5}
+         \PY{n}{cat\PYZus{}many\PYZus{}missing} \PY{o}{=} \PY{n}{cat\PYZus{}many\PYZus{}missing}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{cat\PYZus{}many\PYZus{}missing} \PY{o}{==} \PY{k+kc}{True}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{cat\PYZus{}many\PYZus{}missing}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['ps\_car\_03\_cat']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} We can also have a look exactly how many are missing in the applicable columns}
+         \PY{n}{counts} \PY{o}{=} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{cat\PYZus{}feats\PYZus{}cleaned}\PY{p}{]}\PY{p}{[}\PY{n}{df} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+         \PY{n}{cols\PYZus{}with\PYZus{}missing} \PY{o}{=} \PY{n}{counts}\PY{p}{[}\PY{n}{counts}\PY{o}{.}\PY{n}{values} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Column  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Missing count  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Missing ratio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{col}\PY{p}{,} \PY{n}{count} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{cols\PYZus{}with\PYZus{}missing}\PY{o}{.}\PY{n}{index}\PY{p}{,} \PY{n}{cols\PYZus{}with\PYZus{}missing}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{col}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{count}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:.3f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{count} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Column   Missing count   Missing ratio
+ps\_ind\_02\_cat    216    0.000
+ps\_ind\_04\_cat    83    0.000
+ps\_ind\_05\_cat    5809    0.010
+ps\_car\_01\_cat    107    0.000
+ps\_car\_02\_cat    5    0.000
+ps\_car\_03\_cat    411231    0.691
+ps\_car\_05\_cat    266551    0.448
+ps\_car\_07\_cat    11489    0.019
+ps\_car\_09\_cat    569    0.001
+
+    \end{Verbatim}
+
+    Now I will remove the one column that I identified.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{df\PYZus{}cleaned}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{cat\PYZus{}many\PYZus{}missing}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} The cat\PYZus{}feats list needs to be updated}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{cat\PYZus{}many\PYZus{}missing}\PY{p}{:} \PY{n}{cat\PYZus{}feats\PYZus{}cleaned}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    Remaing missing values will be converted to dummy variables during the
+feature engineering stage.
+
+    \paragraph{Binary features}\label{binary-features}
+
+Let's now check for missing values among the binary features.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{bin\PYZus{}many\PYZus{}missing} \PY{o}{=} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{bin\PYZus{}feats\PYZus{}cleaned}\PY{p}{]}\PY{p}{[}\PY{n}{df} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.5}
+         \PY{n}{bin\PYZus{}many\PYZus{}missing} \PY{o}{=} \PY{n}{bin\PYZus{}many\PYZus{}missing}\PY{o}{.}\PY{n}{index}\PY{p}{[}\PY{n}{bin\PYZus{}many\PYZus{}missing} \PY{o}{==} \PY{k+kc}{True}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bin\PYZus{}many\PYZus{}missing}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[]
+
+    \end{Verbatim}
+
+    We can be sure that there are no features with more than half of there
+values missing. Let's just make sure that no values at all are missing
+for the binary features.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Lets check for missing values, in case any exist}
+         \PY{n}{counts} \PY{o}{=} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{bin\PYZus{}feats\PYZus{}cleaned}\PY{p}{]}\PY{p}{[}\PY{n}{df} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+         \PY{n}{cols\PYZus{}with\PYZus{}missing} \PY{o}{=} \PY{n}{counts}\PY{p}{[}\PY{n}{counts}\PY{o}{.}\PY{n}{values} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{cols\PYZus{}with\PYZus{}missing}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} Series([], dtype: int64)
+\end{Verbatim}
+            
+    \subsubsection{Exploratory data
+analysis}\label{exploratory-data-analysis}
+
+In this section, I will first explore the correlation between numerical
+features and then I will explore the correlation between each feature
+and the target variable.
+
+    \paragraph{Numerical features of float
+type}\label{numerical-features-of-float-type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{} First of all, we only want to select float values}
+         \PY{n}{df\PYZus{}float} \PY{o}{=} \PY{n}{df\PYZus{}cleaned}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{df\PYZus{}corr} \PY{o}{=} \PY{n}{df\PYZus{}float}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Setting a filter for values of 1 or less than 0.5}
+         \PY{n+nb}{filter} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}corr} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{df\PYZus{}corr} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} We can filter out values by setting them to 0}
+         \PY{n}{df\PYZus{}corr}\PY{p}{[}\PY{n+nb}{filter}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{df\PYZus{}corr}
+         
+         \PY{n}{f}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Pearson correlation of numeric features}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{24}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df\PYZus{}corr}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{14}\PY{p}{\PYZcb{}}\PY{p}{,}
+                     \PY{n}{cmap}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{diverging\PYZus{}palette}\PY{p}{(}\PY{l+m+mi}{220}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a0f368400>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Kaggle_competition_insurance-claims_files/Kaggle_competition_insurance-claims_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see that there are strong correlations between four pairs of
+features.
+
+    Let's look at pair plots of the strongly correlated variables. This way
+we can gain insight into the linear correlations between the features.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}reg\PYZus{}01}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}reg\PYZus{}02}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{df\PYZus{}cleaned}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{frac}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Set1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{scatter\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{0.3}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Kaggle_competition_insurance-claims_files/Kaggle_competition_insurance-claims_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}car\PYZus{}12}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}car\PYZus{}13}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{df\PYZus{}cleaned}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{frac}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Set1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{scatter\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{0.3}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Kaggle_competition_insurance-claims_files/Kaggle_competition_insurance-claims_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}car\PYZus{}13}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}car\PYZus{}15}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{df\PYZus{}cleaned}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{frac}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Set1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{scatter\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mf}{0.3}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Kaggle_competition_insurance-claims_files/Kaggle_competition_insurance-claims_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \paragraph{Numerical features of ordinal
+type}\label{numerical-features-of-ordinal-type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{df\PYZus{}ordinal} \PY{o}{=} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{num\PYZus{}feats\PYZus{}cleaned}\PY{p}{]}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n}{include}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{df\PYZus{}corr} \PY{o}{=} \PY{n}{df\PYZus{}ordinal}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{filter} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}corr} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{df\PYZus{}corr} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.1}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} We can filter out values by setting them to 0}
+         \PY{n}{df\PYZus{}corr}\PY{p}{[}\PY{n+nb}{filter}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{df\PYZus{}corr}
+         
+         \PY{n}{f}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{Pearson correlation of orindal features}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{24}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{df\PYZus{}corr}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{annot\PYZus{}kws}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{14}\PY{p}{\PYZcb{}}\PY{p}{,}
+                     \PY{n}{cmap}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{diverging\PYZus{}palette}\PY{p}{(}\PY{l+m+mi}{220}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a14a12a58>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Kaggle_competition_insurance-claims_files/Kaggle_competition_insurance-claims_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The correlations are very small, so not worthy of consideration.
+
+    Let's now check the correlations between all numerical features and the
+target variables. We can use the \textbf{pointbiserialr} tool from
+scipy.stats to check the correlation between the numerical values of the
+features and the binary values of the target. The pointbiserialr method
+returns the correlation and the p-value. If the p-value is more than
+0.05 for any given correlation, we cannot reject a null-hypothesis and
+should consider eliminating the feature, as it has a negligible impact
+on the target variable.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} check correlation between cols and target}
+         \PY{n}{num\PYZus{}weak\PYZus{}corr} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{num\PYZus{}feats\PYZus{}cleaned}\PY{p}{:}
+             \PY{n}{corr}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{n}{pointbiserialr}\PY{p}{(}\PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{,} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{o}{.}\PY{l+m+mi}{05}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{col}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ | Correlation: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{corr}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{| P\PYZhy{}value: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{p}\PY{p}{)}
+                 \PY{n}{num\PYZus{}weak\PYZus{}corr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PS\_CAR\_11  | Correlation:  -0.00121335689622 | P-value:  0.349220144637
+PS\_CALC\_01  | Correlation:  0.00178195465192 | P-value:  0.169200922734
+PS\_CALC\_02  | Correlation:  0.00135968897833 | P-value:  0.294178988979
+PS\_CALC\_03  | Correlation:  0.00190697359641 | P-value:  0.141229448762
+PS\_CALC\_04  | Correlation:  3.27204551002e-05 | P-value:  0.979860521763
+PS\_CALC\_05  | Correlation:  0.000770880136533 | P-value:  0.552022133573
+PS\_CALC\_06  | Correlation:  8.18222597807e-05 | P-value:  0.949666387392
+PS\_CALC\_07  | Correlation:  -0.000103476904853 | P-value:  0.936370675865
+PS\_CALC\_08  | Correlation:  -0.00100585483842 | P-value:  0.43773988648
+PS\_CALC\_09  | Correlation:  0.000718967584364 | P-value:  0.579111997695
+PS\_CALC\_10  | Correlation:  0.00106083404448 | P-value:  0.413110667262
+PS\_CALC\_11  | Correlation:  0.000371437394891 | P-value:  0.774446720276
+PS\_CALC\_12  | Correlation:  -0.00113258539814 | P-value:  0.382233773313
+PS\_CALC\_13  | Correlation:  -0.000446464531809 | P-value:  0.730510442941
+PS\_CALC\_14  | Correlation:  0.00136227534312 | P-value:  0.2932615811
+
+    \end{Verbatim}
+
+    \paragraph{Categorical features}\label{categorical-features}
+
+For checking correlation between the categorical features and the target
+variable, we can create a crosstab table using Pandas and apply the
+\textbf{Chi-squared} tool to determine a p-value. Once again, if the
+p-value is more than 0.05, then we could reject that feature.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{cat\PYZus{}weak\PYZus{}corr} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{cat\PYZus{}feats\PYZus{}cleaned}\PY{p}{:}
+             \PY{n}{crosstab} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{crosstab}\PY{p}{(} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{,}  \PY{n}{rownames} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{p}{,} \PY{n}{colnames} \PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{chi2}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{dof}\PY{p}{,} \PY{n}{ex} \PY{o}{=} \PY{n}{chi2\PYZus{}contingency}\PY{p}{(}\PY{n}{crosstab}\PY{p}{,} \PY{n}{correction}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+             \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.05}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{col}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ | Chi2: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{chi2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ | p\PYZhy{}value: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{p}\PY{p}{)}
+                 \PY{n}{cat\PYZus{}weak\PYZus{}corr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PS\_CAR\_10\_CAT  | Chi2:  0.648974774486  | p-value:  0.722897825327
+
+    \end{Verbatim}
+
+    It appears that all but one of the categorical features are worth
+keeping.
+
+    \paragraph{Binary features}\label{binary-features}
+
+We can do the same for the binary variables as we did for the
+categorical variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{bin\PYZus{}weak\PYZus{}corr} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{bin\PYZus{}feats\PYZus{}cleaned}\PY{p}{:}
+             \PY{n}{crosstab} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{crosstab}\PY{p}{(} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{,}  \PY{n}{rownames} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{p}{,} \PY{n}{colnames} \PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{chi2}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{dof}\PY{p}{,} \PY{n}{ex} \PY{o}{=} \PY{n}{chi2\PYZus{}contingency}\PY{p}{(}\PY{n}{crosstab}\PY{p}{)}
+             \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.05}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{col}\PY{o}{.}\PY{n}{upper}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ | Chi2: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{chi2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ | p\PYZhy{}value: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{p}\PY{p}{)}
+                 \PY{n}{bin\PYZus{}weak\PYZus{}corr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+PS\_IND\_10\_BIN  | Chi2:  1.49083915207  | p-value:  0.222086306306
+PS\_IND\_11\_BIN  | Chi2:  2.19212980726  | p-value:  0.138717387178
+PS\_IND\_13\_BIN  | Chi2:  3.18877595278  | p-value:  0.0741455110366
+PS\_CALC\_15\_BIN  | Chi2:  0.135285302885  | p-value:  0.713013790073
+PS\_CALC\_16\_BIN  | Chi2:  0.224798128543  | p-value:  0.635408055174
+PS\_CALC\_17\_BIN  | Chi2:  0.01544956754  | p-value:  0.901080685209
+PS\_CALC\_18\_BIN  | Chi2:  0.17519257769  | p-value:  0.675537637115
+PS\_CALC\_19\_BIN  | Chi2:  1.79054056273  | p-value:  0.180860314623
+PS\_CALC\_20\_BIN  | Chi2:  0.668511486963  | p-value:  0.413571052218
+
+    \end{Verbatim}
+
+    \paragraph{Using classification tools}\label{using-classification-tools}
+
+Another approach is to use a classication tool - such as random forest -
+to determine the importance of each feature. We can achieve this by
+fitting a model and then calling the feature\_importances method.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{} Sets up a classifier and fits a model to all features of the dataset}
+         \PY{n}{clf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{150}\PY{p}{,} \PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{min\PYZus{}samples\PYZus{}leaf}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{max\PYZus{}features}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{df\PYZus{}cleaned}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} We need a list of features as well}
+         \PY{n}{features} \PY{o}{=} \PY{n}{df\PYZus{}cleaned}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{} COMPLETE \PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+--- COMPLETE ---
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{joblib}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{clf}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{clf\PYZus{}model.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Using the following code from Anisotropic's kernal
+(https://www.kaggle.com/arthurtok/interactive-porto-insights-a-plot-ly-tutorial),
+we can use Plotly to create a nice horizontal bar chart for visualising
+the ranking of most important features.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,} \PY{n}{features}\PY{p}{)}\PY{p}{,} 
+                                                                     \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{trace2} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+             \PY{n}{x}\PY{o}{=}\PY{n}{x} \PY{p}{,}
+             \PY{n}{y}\PY{o}{=}\PY{n}{y}\PY{p}{,}
+             \PY{n}{marker}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{color}\PY{o}{=}\PY{n}{x}\PY{p}{,}
+                 \PY{n}{colorscale} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,}
+                 \PY{n}{reversescale} \PY{o}{=} \PY{k+kc}{True}
+             \PY{p}{)}\PY{p}{,}
+             \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Random Forest Feature importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{orientation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{p}{)}
+         
+         \PY{n}{layout} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+             \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ranking of most influential features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{n}{width} \PY{o}{=} \PY{l+m+mi}{900}\PY{p}{,} \PY{n}{height} \PY{o}{=} \PY{l+m+mi}{1500}\PY{p}{,}
+             \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{showgrid}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{showline}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{showticklabels}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+             \PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{fig1} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{p}{[}\PY{n}{trace2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{fig1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{layout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig1}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plots}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \subsubsection{Feature selection}\label{feature-selection}
+
+    I would like to select only the features that have the greatest impact
+according to the graph above, with a combination of all features types.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{feats\PYZus{}to\PYZus{}keep} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}ind\PYZus{}06\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}car\PYZus{}15}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}ind\PYZus{}07\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}car\PYZus{}12}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}car\PYZus{}01\PYZus{}cat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}ind\PYZus{}15}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}car\PYZus{}14}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}car\PYZus{}04\PYZus{}cat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}car\PYZus{}07\PYZus{}cat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}ind\PYZus{}03}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}reg\PYZus{}02}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}ind\PYZus{}17\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}reg\PYZus{}03}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}ind\PYZus{}05\PYZus{}cat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ps\PYZus{}car\PYZus{}13}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{c+c1}{\PYZsh{} create new dataframe with only selected features, target and id}
+         \PY{n}{df\PYZus{}select\PYZus{}feats} \PY{o}{=} \PY{n}{df\PYZus{}cleaned}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{n}{feats\PYZus{}to\PYZus{}keep}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} separate col names into categories}
+         \PY{n}{num\PYZus{}feats\PYZus{}to\PYZus{}keep}\PY{p}{,} \PY{n}{cat\PYZus{}feats\PYZus{}to\PYZus{}keep}\PY{p}{,} \PY{n}{bin\PYZus{}feats\PYZus{}to\PYZus{}keep} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{feats\PYZus{}to\PYZus{}keep}\PY{p}{:}
+             \PY{k}{if} \PY{n}{col} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{or} \PY{n}{col} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{k}{pass}
+             \PY{k}{elif} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}cat}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{col}\PY{p}{:}
+                 \PY{n}{cat\PYZus{}feats\PYZus{}to\PYZus{}keep}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+             \PY{k}{elif} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{col}\PY{p}{:}
+                 \PY{n}{bin\PYZus{}feats\PYZus{}to\PYZus{}keep}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{num\PYZus{}feats\PYZus{}to\PYZus{}keep}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{col}\PY{p}{)}
+                 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{} Numerical features \PYZhy{}\PYZhy{}\PYZhy{} : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{num\PYZus{}feats\PYZus{}to\PYZus{}keep}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{} Categorical features \PYZhy{}\PYZhy{}\PYZhy{} : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cat\PYZus{}feats\PYZus{}to\PYZus{}keep}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{} Binary features \PYZhy{}\PYZhy{}\PYZhy{} : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bin\PYZus{}feats\PYZus{}to\PYZus{}keep}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+--- Numerical features --- :  
+ ['ps\_car\_15', 'ps\_car\_12', 'ps\_ind\_15', 'ps\_car\_14', 'ps\_ind\_03', 'ps\_reg\_02', 'ps\_reg\_03', 'ps\_car\_13'] 
+
+--- Categorical features --- :  
+ ['ps\_car\_01\_cat', 'ps\_car\_04\_cat', 'ps\_car\_07\_cat', 'ps\_ind\_05\_cat'] 
+
+--- Binary features --- :  
+ ['ps\_ind\_06\_bin', 'ps\_ind\_07\_bin', 'ps\_ind\_17\_bin'] 
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{} \PYZsh{} Removing the features that have weak correlations}
+         \PY{c+c1}{\PYZsh{} df\PYZus{}select\PYZus{}features.drop(columns=num\PYZus{}weak\PYZus{}corr + cat\PYZus{}weak\PYZus{}corr + bin\PYZus{}weak\PYZus{}corr, inplace=True)}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{} The columns lists need to be updated as well}
+         \PY{c+c1}{\PYZsh{} for i in num\PYZus{}weak\PYZus{}corr: num\PYZus{}feats\PYZus{}selected.remove(i)}
+         \PY{c+c1}{\PYZsh{} for i in cat\PYZus{}weak\PYZus{}corr: cat\PYZus{}feats\PYZus{}selected.remove(i)}
+         \PY{c+c1}{\PYZsh{} for i in bin\PYZus{}weak\PYZus{}corr: bin\PYZus{}feats\PYZus{}selected.remove(i)}
+\end{Verbatim}
+
+
+    \subsubsection{Feature engineering}\label{feature-engineering}
+
+We still need to deal with the categorical variables because they cannot
+read in as they are. We need to create dummy variables for each feature.
+This will greatly increase the number of features that we have, so I
+would like to minimize these features if I can.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{df\PYZus{}engineered} \PY{o}{=} \PY{n}{df\PYZus{}select\PYZus{}feats}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    We can check how many categories there are for each feature. This way we
+know which features are going to result in the most additional features
+after converting them to dummy variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{df\PYZus{}engineered}\PY{p}{[}\PY{n}{cat\PYZus{}feats\PYZus{}to\PYZus{}keep}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}98}]:} ps\_car\_01\_cat    13
+         ps\_car\_04\_cat    10
+         ps\_car\_07\_cat     3
+         ps\_ind\_05\_cat     8
+         dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{c+c1}{\PYZsh{} convert cat feats to dummy variables (0s and 1s)}
+         \PY{n}{cat\PYZus{}dummy\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df\PYZus{}engineered}\PY{p}{[}\PY{n}{cat\PYZus{}feats\PYZus{}to\PYZus{}keep}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} replacing original cat cols with new dummie cols}
+         \PY{n}{df\PYZus{}engineered} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{df\PYZus{}engineered}\PY{p}{,} \PY{n}{cat\PYZus{}dummy\PYZus{}df}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{cat\PYZus{}feats\PYZus{}to\PYZus{}keep}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{df\PYZus{}engineered}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}108}]:} (595212, 47)
+\end{Verbatim}
+            
+    \subsubsection{Class balancing}\label{class-balancing}
+
+Before going into feature scaling, I would like to check out the ratio
+of ones to zeros in the target variable. The reason I want to do this is
+because I already know that there is a very large class imbalance. We
+would not expect half of the people who are insured to lodge a claim.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{df\PYZus{}engineered}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}101}]:} 0    573518
+          1     21694
+          Name: target, dtype: int64
+\end{Verbatim}
+            
+    Sure enough, there are many more zeros. We can either over-sample
+(duplicate the training examples corresponding to the ones) or
+under-sample (remove training examples corresponding to the zeros).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{c+c1}{\PYZsh{} number of zeros}
+          \PY{n}{num\PYZus{}zeros} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}engineered}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} number of ones}
+          \PY{n}{num\PYZus{}ones} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}engineered}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} difference in the number of zeros and ones}
+          \PY{n}{diff} \PY{o}{=} \PY{n}{num\PYZus{}zeros} \PY{o}{\PYZhy{}} \PY{n}{num\PYZus{}ones}
+          \PY{c+c1}{\PYZsh{} ratios}
+          \PY{n}{ones\PYZus{}to\PYZus{}zeros} \PY{o}{=} \PY{n}{num\PYZus{}ones} \PY{o}{/} \PY{n}{num\PYZus{}zeros}
+          \PY{n}{zeros\PYZus{}to\PYZus{}ones} \PY{o}{=} \PY{n}{num\PYZus{}zeros} \PY{o}{/} \PY{n}{num\PYZus{}ones}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ratio of ones to zeros: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ones\PYZus{}to\PYZus{}zeros} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Ratio of ones to zeros:  3.78261885416  \%
+
+    \end{Verbatim}
+
+    \paragraph{Sampling from examples with a target of
+zero}\label{sampling-from-examples-with-a-target-of-zero}
+
+I would like to select a sample that makes up half of the original
+length of the dataset.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{n}{df\PYZus{}zeros} \PY{o}{=} \PY{n}{df\PYZus{}engineered}\PY{p}{[}\PY{n}{df\PYZus{}engineered}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{df\PYZus{}zeros\PYZus{}sample} \PY{o}{=} \PY{n}{df\PYZus{}zeros}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{n}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{rows} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+          \PY{n}{df\PYZus{}zeros\PYZus{}sample}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{n}{df\PYZus{}zeros\PYZus{}sample}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}127}]:}         id  target  ps\_ind\_06\_bin  ps\_car\_15  ps\_ind\_07\_bin  ps\_car\_12  \textbackslash{}
+          0   465947       0              1    0.00000              0    0.62498   
+          1   381915       0              0    3.74166              0    0.31623   
+          2  1060494       0              1    3.46410              0    0.40000   
+          3   469383       0              0    3.00000              1    0.37417   
+          4   491496       0              1    3.74166              0    0.40000   
+          
+             ps\_ind\_15  ps\_car\_14  ps\_ind\_03  ps\_reg\_02       {\ldots}         \textbackslash{}
+          0          5    0.42249          3    0.20000       {\ldots}          
+          1          6    0.28879          9    0.50000       {\ldots}          
+          2          8    0.40743          7    0.80000       {\ldots}          
+          3         13    0.38210          8    0.40000       {\ldots}          
+          4         12    0.30968          2    0.20000       {\ldots}          
+          
+             ps\_car\_07\_cat\_0  ps\_car\_07\_cat\_1  ps\_ind\_05\_cat\_-1  ps\_ind\_05\_cat\_0  \textbackslash{}
+          0                0                1                 0                1   
+          1                0                1                 0                1   
+          2                0                1                 0                1   
+          3                0                1                 0                1   
+          4                0                1                 0                1   
+          
+             ps\_ind\_05\_cat\_1  ps\_ind\_05\_cat\_2  ps\_ind\_05\_cat\_3  ps\_ind\_05\_cat\_4  \textbackslash{}
+          0                0                0                0                0   
+          1                0                0                0                0   
+          2                0                0                0                0   
+          3                0                0                0                0   
+          4                0                0                0                0   
+          
+             ps\_ind\_05\_cat\_5  ps\_ind\_05\_cat\_6  
+          0                0                0  
+          1                0                0  
+          2                0                0  
+          3                0                0  
+          4                0                0  
+          
+          [5 rows x 47 columns]
+\end{Verbatim}
+            
+    \paragraph{Duplicating examples with a target of
+one}\label{duplicating-examples-with-a-target-of-one}
+
+I will duplicate all of the examples corresponding to ones.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{n}{df\PYZus{}ones} \PY{o}{=} \PY{n}{df\PYZus{}engineered}\PY{p}{[}\PY{n}{df\PYZus{}engineered}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{} Adds duplicates of the ones set until half of the dataset is occupied}
+          \PY{n}{df\PYZus{}ones\PYZus{}dup} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{rows} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{/} \PY{n}{num\PYZus{}ones}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{n}{df\PYZus{}ones\PYZus{}dup} \PY{o}{=} \PY{n}{df\PYZus{}ones\PYZus{}dup}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{df\PYZus{}ones}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{Combining examples into one
+dataset}\label{combining-examples-into-one-dataset}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{n}{df\PYZus{}rebalanced} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{df\PYZus{}zeros\PYZus{}sample}\PY{p}{,} \PY{n}{df\PYZus{}ones\PYZus{}dup}\PY{p}{]}\PY{p}{)}
+          \PY{n}{df\PYZus{}rebalanced} \PY{o}{=} \PY{n}{df\PYZus{}rebalanced}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{frac}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{n}{df\PYZus{}rebalanced}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}129}]:} (579628, 47)
+\end{Verbatim}
+            
+    The number of rows is similar to what we started with.
+
+    \subsubsection{Feature scaling}\label{feature-scaling}
+
+Scaling features tends to lead to a performance improvement with
+classification problems, so we will do it here.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}130}]:} \PY{n}{df\PYZus{}scaled} \PY{o}{=} \PY{n}{df\PYZus{}rebalanced}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{df\PYZus{}scaled}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Set up scaler and create a scaled input matrix}
+          \PY{n}{scaler} \PY{o}{=} \PY{n}{MinMaxScaler}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} MinMaxScalar outputs data as a numpy array (which is necessary for XGBoost)}
+          \PY{n}{X\PYZus{}scaled} \PY{o}{=} \PY{n}{scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{df\PYZus{}scaled}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Training and Evaluation}\label{training-and-evaluation}
+
+Now we can split the data up into train and test sets, fit
+classification models to the train set and finally try to classify
+examples from the test set and observe the resulting accuracy.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{X} \PY{o}{=} \PY{n}{X\PYZus{}scaled}
+          \PY{c+c1}{\PYZsh{} y needs to be converted to an array}
+          \PY{n}{y} \PY{o}{=} \PY{n}{df\PYZus{}rebalanced}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{as\PYZus{}matrix}\PY{p}{(}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} split up the data and target values}
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+          
+          \PY{n}{models} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{models}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogReg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{models}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{XGBoost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{XGBClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{model} \PY{o+ow}{in} \PY{n}{models}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{++++++++++++++ }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ ++++++++++++++}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} Train model}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{} Training model using }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ \PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{=== DONE ===}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Save model}
+              \PY{n}{joblib}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZus{}model\PYZus{}trained.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{name}\PY{p}{)}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Make predictions on the test\PYZhy{}set}
+              \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} Classification report}
+              \PY{n}{report} \PY{o}{=} \PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{report}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+              \PY{c+c1}{\PYZsh{} Plotting cumulative gains chart (lift curve)}
+              \PY{n}{predicted\PYZus{}probas} \PY{o}{=} \PY{n}{LogReg\PYZus{}model}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+              \PY{n}{skplt}\PY{o}{.}\PY{n}{metrics}\PY{o}{.}\PY{n}{plot\PYZus{}cumulative\PYZus{}gain}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{predicted\PYZus{}probas}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+              
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{======================================}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+++++++++++++++ LogReg ++++++++++++++
+
+
+--- Training model using LogReg ---
+=== DONE ===
+
+
+              precision    recall  f1-score   support
+
+          0       0.59      0.67      0.62     59588
+          1       0.59      0.50      0.54     56338
+
+avg / total       0.59      0.59      0.58    115926
+ 
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Kaggle_competition_insurance-claims_files/Kaggle_competition_insurance-claims_83_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+======================================
+
+
+++++++++++++++ XGBoost ++++++++++++++
+
+
+--- Training model using XGBoost ---
+=== DONE ===
+
+
+              precision    recall  f1-score   support
+
+          0       0.60      0.67      0.63     59588
+          1       0.60      0.52      0.56     56338
+
+avg / total       0.60      0.60      0.60    115926
+ 
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Kaggle_competition_insurance-claims_files/Kaggle_competition_insurance-claims_83_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+======================================
+
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
